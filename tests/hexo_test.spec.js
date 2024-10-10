@@ -4,6 +4,6 @@ const exp = require('constants')
 
 test('check if hexo exists', async ({page}) => {
 
-    await page.goto('http://localhost:4000/hexo/')
+    await page.goto('http://localhost:4000/')
     await expect(page).toHaveTitle('Index')
 })
