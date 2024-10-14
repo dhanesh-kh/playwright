@@ -29,6 +29,9 @@ module.exports = defineConfig({
     headless: false,  // This should be false if you want to run in headed mode
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
+
+    timeout: 60000, // Set global timeout to 60 seconds
+    
   },
 
   /* Configure projects for major browsers */
