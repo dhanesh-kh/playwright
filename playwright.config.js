@@ -26,9 +26,12 @@ module.exports = defineConfig({
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
     baseURL: 'http://localhost:4000',  // Set to Hexo's generated site URL
-
+    headless: true,  // This should be false if you want to run in headed mode
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
+
+    timeout: 60000, // Set global timeout to 60 seconds
+    
   },
 
   /* Configure projects for major browsers */
