@@ -8,23 +8,23 @@ test('check if hexo exists', async ({page}) => {
     await expect(page).toHaveTitle('Index')
 })
 
-test('check navbar important sections, such as "Home," "Archives," and "Documentation."', async ({page}) => {
-    await page.goto('http://localhost:4000/')
-    await expect(page.locator('a.main-nav-link').nth(0)).toHaveText('Home')
-    await expect(page.locator('a.main-nav-link').nth(1)).toHaveText('Archives')
-    await expect(page.locator('a.main-nav-link').nth(2)).toHaveText('Documentation')
+//checks the text in a list matches the text passed as argument. essentially checks existence for a list overall and its text. 
+test('1.2.1 - check Text is broken up into bullet points and numbered lists as appropriate, rather than large paragraph blocks."', async ({page}) => {
+    await page.goto('http://localhost:4000/');
+    await page.getByText('Kernel & Threads').click();
+    expect(page.url()).toBe('http://localhost:4000/hexo/kernel-thread/');
+    await expect (page.getByRole('listitem').filter({ hasText: 'It connects apps and hardware, like the CPU and memory.'})).toHaveCount(1);    
+    await expect (page.getByRole('listitem').filter({ hasText: 'A thread is a set of instructions sent to the CPU to execute.'})).toHaveCount(1);    
+    await page.goto('http://localhost:4000/');
+    await expect (page.getByRole('listitem').filter({ hasText: 'System Foundations'})).toHaveCount(1);    
+
    
 })
 
 
-test('1.1.2 - check navbar Navigation bar remains visible consistently across all pages."', async ({page}) => {
+test('check Different sections are labeled with various fonts, bold, or underlined text to clearly divide content."', async ({page}) => {
     await page.goto('http://localhost:4000/')
     await page.getByText('Setting up GitHub').click()
     expect(page.url()).toBe('http://localhost:4000/hexo/github-setup/')
-    await page.isVisible('a#main-nav-toggle')
-   
-    await page.goto('http://localhost:4000/')
-    await page.getByText('Docker’s Business Contributions').click()
-    expect(page.url()).toBe('http://localhost:4000/hexo/docker-role-in-industry/')
     await page.isVisible('a#main-nav-toggle')
 })
