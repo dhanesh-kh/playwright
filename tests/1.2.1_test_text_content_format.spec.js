@@ -22,6 +22,7 @@ test('1.2.1 - check Text is broken up into bullet points and numbered lists as a
 })
 
 
+//******************INCOMPLETEEE************************************
 test('check Different sections are labeled with various fonts, bold, or underlined text to clearly divide content."', async ({page}) => {
     await page.goto('http://localhost:4000/')
     await page.getByText('Setting up GitHub').click()

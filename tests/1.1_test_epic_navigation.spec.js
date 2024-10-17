@@ -8,23 +8,25 @@ test('check if hexo exists', async ({page}) => {
     await expect(page).toHaveTitle('Index')
 })
 
-test('check navbar important sections, such as "Home," "Archives," and "Documentation."', async ({page}) => {
+test('Site navigation that enables easy access to various topics. Clear labels, structure, and consistent navigation elements."', async ({page}) => {
     await page.goto('http://localhost:4000/')
-    await expect(page.locator('a.main-nav-link').nth(0)).toHaveText('Home')
-    await expect(page.locator('a.main-nav-link').nth(1)).toHaveText('Archives')
-    await expect(page.locator('a.main-nav-link').nth(2)).toHaveText('Documentation')
+
+    //topics & navigation elements
+    await page.getByText('Kubernete’s Business Contributions').click()
+    expect(page.url()).toBe('http://localhost:4000/hexo/kubernetes-role-in-industry/')
+
+    await page.goto('http://localhost:4000/')
+    await page.getByText('The 12-Factor App').click()
+    expect(page.url()).toBe('http://localhost:4000/hexo/12-factor-app/')
+
+    //clear labels
+    await page.goto('http://localhost:4000/')
+    await page.isVisible('h3#Environment-Preparation')
+    await expect(page.locator('h3#Environment-Preparation')).toHaveText('Environment Preparation')
+
+    await page.isVisible('h3#System-Foundations')
+    await expect(page.locator('h3#System-Foundations')).toHaveText('System Foundations')
    
 })
 
 
-test('1.1.2 - check navbar Navigation bar remains visible consistently across all pages."', async ({page}) => {
-    await page.goto('http://localhost:4000/')
-    await page.getByText('Setting up GitHub').click()
-    expect(page.url()).toBe('http://localhost:4000/hexo/github-setup/')
-    await page.isVisible('a#main-nav-toggle')
-   
-    await page.goto('http://localhost:4000/')
-    await page.getByText('Docker’s Business Contributions').click()
-    expect(page.url()).toBe('http://localhost:4000/hexo/docker-role-in-industry/')
-    await page.isVisible('a#main-nav-toggle')
-})

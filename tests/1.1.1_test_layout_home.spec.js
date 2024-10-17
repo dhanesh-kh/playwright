@@ -13,7 +13,7 @@ test('1.1.1 - check Home page provides an overview of the site and an index for 
     await page.goto('http://localhost:4000/')
     await page.isVisible('h2#Introduction')
     await expect(page.locator('h2#Introduction')).toHaveText('Introduction')
-    await expect(page.locator('p').nth(1)).toHaveText('A dedicated platform for NJIT students to buy and sell textbooks, lab coats,PC parts, and more — essentially a student-only version of Craigslist.')
+    await expect(page.locator('p').nth(1)).toHaveText('A dedicated platform for NJIT students to buy and sell textbooks, lab coats,\n PC parts, and more — essentially a student-only version of Craigslist.')
 
 
 })

@@ -8,23 +8,28 @@ test('check if hexo exists', async ({page}) => {
     await expect(page).toHaveTitle('Index')
 })
 
-test('check navbar important sections, such as "Home," "Archives," and "Documentation."', async ({page}) => {
+test('check Content is organized and formatted for easy comprehension and engagement. Different structures for text"', async ({page}) => {
+    // by organized, formatted, & structures,  check for things like title, subheadings, bullets, etc. 
     await page.goto('http://localhost:4000/')
-    await expect(page.locator('a.main-nav-link').nth(0)).toHaveText('Home')
-    await expect(page.locator('a.main-nav-link').nth(1)).toHaveText('Archives')
-    await expect(page.locator('a.main-nav-link').nth(2)).toHaveText('Documentation')
-   
+    await page.getByText('Docker Overview').click()
+    await expect(page.locator('h1.p-name.article-title')).toHaveText('Docker Guide')   
 })
 
+test('check use of graphics', async ({page}) => {
+//graphics
+    await page.goto('http://localhost:4000/')
+    await page.getByText('Docker vs. Kubernetes').click()
+    await page.$(`img[alt="Docker Architecture"]`) !== null;
+    await page.getByAltText('Docker Architecture').click();})
 
-test('1.1.2 - check navbar Navigation bar remains visible consistently across all pages."', async ({page}) => {
+
+test('check variety in topics', async ({page}) => {
     await page.goto('http://localhost:4000/')
-    await page.getByText('Setting up GitHub').click()
-    expect(page.url()).toBe('http://localhost:4000/hexo/github-setup/')
-    await page.isVisible('a#main-nav-toggle')
-   
-    await page.goto('http://localhost:4000/')
-    await page.getByText('Docker’s Business Contributions').click()
-    expect(page.url()).toBe('http://localhost:4000/hexo/docker-role-in-industry/')
-    await page.isVisible('a#main-nav-toggle')
-})
+    await expect(page.locator('h4#Why-Learn-Git')).toHaveText('Why Learn Git?')
+    await expect(page.locator('a[href="kernel-thread"]')).toHaveText('Kernel & Threads')
+    const factorText = (page.locator('a[href="kernel-thread"]')).textContent();
+    const docText = (page.locator('a[href="12-factor-app"]')).textContent();
+    //check no two topics are the same(equal)
+    expect(factorText).not.toEqual(docText)
+    ;})
+    

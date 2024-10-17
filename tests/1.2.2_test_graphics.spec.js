@@ -8,23 +8,12 @@ test('check if hexo exists', async ({page}) => {
     await expect(page).toHaveTitle('Index')
 })
 
-test('check navbar important sections, such as "Home," "Archives," and "Documentation."', async ({page}) => {
+test('check Images are included on relevant pages to enhance content understanding based on alt text. also check image has descriptive alt text to define the content it represents."', async ({page}) => {
     await page.goto('http://localhost:4000/')
-    await expect(page.locator('a.main-nav-link').nth(0)).toHaveText('Home')
-    await expect(page.locator('a.main-nav-link').nth(1)).toHaveText('Archives')
-    await expect(page.locator('a.main-nav-link').nth(2)).toHaveText('Documentation')
-   
+    await page.getByText('Setting up Docker').click()
+    expect(page.url()).toBe('http://localhost:4000/hexo/docker-setup/')
+    await page.$(`img[alt="Docker For Windows"]`) !== null;
+    await page.getByAltText('Docker For Windows').click();
+
 })
 
-
-test('1.1.2 - check navbar Navigation bar remains visible consistently across all pages."', async ({page}) => {
-    await page.goto('http://localhost:4000/')
-    await page.getByText('Setting up GitHub').click()
-    expect(page.url()).toBe('http://localhost:4000/hexo/github-setup/')
-    await page.isVisible('a#main-nav-toggle')
-   
-    await page.goto('http://localhost:4000/')
-    await page.getByText('Docker’s Business Contributions').click()
-    expect(page.url()).toBe('http://localhost:4000/hexo/docker-role-in-industry/')
-    await page.isVisible('a#main-nav-toggle')
-})
