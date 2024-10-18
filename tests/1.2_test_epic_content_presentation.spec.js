@@ -1,4 +1,4 @@
-// @ts-check
+
 const { test, expect } = require('@playwright/test')
 const exp = require('constants')
 
@@ -37,4 +37,3 @@ test('check variety in topics', async ({page}) => {
     //check no two topics are the same(equal)
     expect(factorText).not.toEqual(docText)
     ;})
-    

@@ -1,4 +1,4 @@
-// @ts-check
+
 const { test, expect } = require('@playwright/test')
 const exp = require('constants')
 
@@ -33,5 +33,4 @@ test('Site navigation that enables easy access to various topics. Clear labels, 
     await expect(page.locator('h3#System-Foundations')).toHaveText('System Foundations')
    
 })
-
 

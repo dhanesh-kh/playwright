@@ -1,4 +1,4 @@
-// @ts-check
+
 const { test, expect } = require('@playwright/test')
 const exp = require('constants')
 
@@ -51,3 +51,4 @@ test('check Different sections are labeled with boldness, or underlined text to 
     const hasSpecificText2 = underlineTextContent.includes(specificText2);
     expect(hasSpecificText2).toBe(true); 
 })
+

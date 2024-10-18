@@ -1,4 +1,4 @@
-// @ts-check
+
 const { test, expect } = require('@playwright/test')
 const exp = require('constants')
 
@@ -42,3 +42,4 @@ test('Links that lead to each major topic page are clearly marked and easy to na
     await expect(page.locator('h1.p-name.article-title')).toHaveText('Business Function & Industry Relevance') 
     expect(page.url()).toBe('http://localhost:4000/hexo/kubernetes-role-in-industry/')
 })
+

@@ -1,4 +1,4 @@
-// @ts-check
+
 const { test, expect } = require('@playwright/test')
 const exp = require('constants')
 
@@ -20,4 +20,3 @@ test('check Images are included on relevant pages to enhance content understandi
     await page.getByAltText('Docker For Windows').click();
 
 })
-
