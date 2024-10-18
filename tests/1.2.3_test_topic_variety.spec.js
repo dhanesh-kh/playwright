@@ -6,25 +6,35 @@ test('check if hexo exists', async ({page}) => {
 
     await page.goto('http://localhost:4000/')
     await expect(page).toHaveTitle('Index')
+    await expect(page.locator('a.p-name.article-title')).toHaveText('NJIT Student Marketplace (NJIT Business)')  
+
 })
 
-test('check navbar important sections, such as "Home," "Archives," and "Documentation."', async ({page}) => {
+test('check Multiple headers throughout the pages indicate different topics."', async ({page}) => {
     await page.goto('http://localhost:4000/')
-    await expect(page.locator('a.main-nav-link').nth(0)).toHaveText('Home')
-    await expect(page.locator('a.main-nav-link').nth(1)).toHaveText('Archives')
-    await expect(page.locator('a.main-nav-link').nth(2)).toHaveText('Documentation')
+    await page.isVisible('h4#GitHub-Setup')
+    await expect(page.locator('h4#GitHub-Setup')).toHaveText('GitHub Setup')
+
+    await page.isVisible('h3#System-Foundations')
+    await expect(page.locator('h3#Architecture-Scaling')).toHaveText('Architecture & Scaling')
    
 })
 
 
-test('1.1.2 - check navbar Navigation bar remains visible consistently across all pages."', async ({page}) => {
+test('check headers are distinct, descriptive, and a list of these headers is included in the index for reference.."', async ({page}) => {
+    //Check distinc, descriptive headers
     await page.goto('http://localhost:4000/')
-    await page.getByText('Setting up GitHub').click()
-    expect(page.url()).toBe('http://localhost:4000/hexo/github-setup/')
-    await page.isVisible('a#main-nav-toggle')
-   
-    await page.goto('http://localhost:4000/')
-    await page.getByText('Docker’s Business Contributions').click()
-    expect(page.url()).toBe('http://localhost:4000/hexo/docker-role-in-industry/')
-    await page.isVisible('a#main-nav-toggle')
+    await page.isVisible('h2#Guidelines-for-Development-and-Deployment')
+    await expect(page.locator('h2#Guidelines-for-Development-and-Deployment')).toHaveText('Guidelines for Development and Deployment')
+
+    await page.isVisible('h3#Documentation-References')
+    await expect(page.locator('h3#Documentation-References')).toHaveText('Documentation & References')
+
+        //Check ordered list of headers
+    await page.locator('ol').isVisible();
+
+    const listItems = ['Introduction', 'Getting Started', 'System Foundations', 'Architecture & Scaling', 'Business Function & Industry Relevance', 'Documentation & References'];
+    for (const item of listItems) {
+    await page.locator(`ul li:has-text("${item}")`).isVisible();
+    }
 })
