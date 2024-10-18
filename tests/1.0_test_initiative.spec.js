@@ -6,6 +6,8 @@ test('check if hexo exists', async ({page}) => {
 
     await page.goto('http://localhost:4000/')
     await expect(page).toHaveTitle('Index')
+    await expect(page.locator('a.p-name.article-title')).toHaveText('NJIT Student Marketplace (NJIT Business)')  
+
 })
 
 test('check text on various topics of containerization, development, and deployment of software applications for novices.', async ({page}) => {
